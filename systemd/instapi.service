@@ -1,0 +1,16 @@
+[Unit]
+Description=InstAutopost - Automação de Postagens no Instagram
+After=network.target
+
+[Service]
+Type=simple
+User=thyez-oliveira
+WorkingDirectory=/home/thyez-oliveira/Documentos/thyez/softwares/instapi
+ExecStart=/usr/bin/bash -c 'uv run python main.py --loop'
+Restart=always
+RestartSec=60
+StandardOutput=append:/home/thyez-oliveira/Documentos/thyez/softwares/instapi/instapi.log
+StandardError=append:/home/thyez-oliveira/Documentos/thyez/softwares/instapi/instapi.log
+
+[Install]
+WantedBy=multi-user.target

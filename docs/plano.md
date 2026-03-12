@@ -31,4 +31,18 @@ Automatiza o upload de conteúdos a partir de uma estrutura de arquivos organiza
     - O script identifica a pasta do dia atual, valida os arquivos e realiza o upload seguindo a ordem alfabética das imagens para carrosséis.
     - Mantém os mesmos padrões de **Segurança e Simulação Humana** (delays e User-Agent) aplicados na listagem.
 
+### 3. Automação e Servidor (Systemd)
+Configuração para execução contínua em um servidor Linux, garantindo que o script verifique e realize postagens de forma autônoma.
+- **Loop de Verificação:** O script operará em um loop com intervalo de **1 hora**.
+- **Lógica de Postagem Diária:**
+    - A cada hora, o script verifica se existe uma pasta correspondente à data atual (`content/YYYY-MM-DD/`).
+    - Implementação de um controle de estado (ex: `posted_dates.json`) para garantir que a postagem seja feita apenas uma vez por dia.
+    - Caso exista conteúdo para o dia e a postagem ainda não tenha sido realizada, o fluxo de upload é disparado.
+- **Serviço do Sistema (Daemon):** Utilização de uma unidade do **systemd** (`instapi.service`) para:
+    - **Persistência:** Inicialização automática junto com o servidor.
+    - **Resiliência:** Reinicialização automática em caso de falhas críticas.
+    - **Logs:** Monitoramento centralizado de saídas e erros via `journalctl -u instapi`.
+- **Ambiente Isolado:** Execução garantida dentro do ambiente virtual (`.venv`) gerenciado pelo `uv`.
+
+
 

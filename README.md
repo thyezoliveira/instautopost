@@ -49,16 +49,48 @@ curl -LsSf https://astral-sh/uv/install.sh | sh
 3. Preencha as suas credenciais no `.env`.
 
 ## 🏃 Como Rodar
+## 🏃 Como Rodar
 
-1. Organize seu conteúdo na pasta `content/`:
-   - Crie uma pasta com a data atual: `content/2026-03-12/`.
-   - Adicione as imagens e o arquivo `caption.txt`.
-2. Execute o script:
+### Modo Manual (Execução Única)
+Para postar o conteúdo da pasta do dia atual uma única vez:
+```bash
+uv run python main.py
+```
+
+Para listar seus posts recentes:
+```bash
+uv run python main.py --list
+```
+
+### Modo Automação (Loop Contínuo)
+O script verificará a cada **1 hora** se existe conteúdo para o dia atual. Se encontrar e ainda não tiver postado (verificado via `posted_dates.json`), ele realizará o upload automaticamente:
+```bash
+uv run python main.py --loop
+```
+
+## ⚙️ Configuração do Servidor (Systemd)
+
+Para manter o bot rodando 24/7 em um servidor Linux, utilize o arquivo de serviço incluso:
+
+1. **Copie o arquivo de serviço:**
    ```bash
-   uv run main.py
+   sudo cp systemd/instapi.service /etc/systemd/system/
    ```
 
+2. **Ative e inicie o serviço:**
+   ```bash
+   sudo systemctl daemon-reload
+   sudo systemctl enable instapi.service
+   sudo systemctl start instapi.service
+   ```
+
+3. **Monitore a execução:**
+   - **Logs do Arquivo:** `tail -f instapi.log`
+   - **Status do Systemd:** `systemctl status instapi.service`
+   - **Logs do Systemd:** `journalctl -u instapi -f`
+
 ## 📂 Estrutura do Projeto
+
 
 - `main.py`: Ponto de entrada que orquestra o fluxo de login e execução de comandos.
 - `auth.py`: Módulo responsável pela lógica de autenticação e simulação de dispositivo.
