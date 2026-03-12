@@ -4,6 +4,7 @@ import random
 import logging
 from datetime import datetime
 from pathlib import Path
+from PIL import Image
 
 logger = logging.getLogger(__name__)
 
@@ -46,12 +47,38 @@ def post_content(cl):
         return
 
     # Busca imagens e legenda
-    images = sorted([f for f in content_path.glob("*") if f.suffix.lower() in [".jpg", ".jpeg", ".png"]])
-    caption_file = content_path / "caption.txt"
+    all_files = list(content_path.glob("*"))
+    valid_images = sorted([f for f in all_files if f.suffix.lower() in [".jpg", ".jpeg", ".png"]])
     
-    if not images:
+    if not valid_images:
         logger.error(f"Nenhuma imagem encontrada na pasta {content_path}.")
         return
+
+    # Renomear e Converter arquivos para JPG para evitar problemas com formatos e caracteres especiais
+    images = []
+    for i, img_path in enumerate(valid_images):
+        new_name = f"media_{i}.jpg"
+        new_path = img_path.parent / new_name
+        
+        try:
+            # Converte para RGB e salva como JPG (Instagrapi prefere JPG para álbuns)
+            with Image.open(img_path) as img:
+                img = img.convert("RGB")
+                img.save(new_path, "JPEG", quality=95)
+            
+            # Remove o original se for diferente do novo (ex: se era .png)
+            if img_path.suffix.lower() != ".jpg":
+                img_path.unlink()
+            elif img_path != new_path:
+                img_path.rename(new_path)
+                
+            images.append(str(new_path.resolve()))
+        except Exception as e:
+            logger.error(f"Erro ao converter imagem {img_path}: {e}")
+    
+    caption_file = content_path / "caption.txt"
+    
+    logger.info(f"Imagens preparadas (convertidas para JPG) para postagem: {images}")
 
     caption = ""
     if caption_file.exists():
@@ -70,8 +97,9 @@ def post_content(cl):
             logger.info(f"Post único realizado com sucesso! ID: {media.pk}")
         else:
             # Carrossel
+            # Garantir que os caminhos sejam strings
             media = cl.album_upload(images, caption)
             logger.info(f"Carrossel realizado com sucesso com {len(images)} imagens! ID: {media.pk}")
 
     except Exception as e:
-        logger.error(f"Erro ao realizar postagem: {e}")
+        logger.error(f"Erro ao realizar postagem: {e}", exc_info=True)
