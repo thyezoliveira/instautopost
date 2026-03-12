@@ -16,6 +16,10 @@ Automação inteligente para Instagram utilizando a biblioteca `instagrapi`. O f
   - Realiza uploads baseados em pastas organizadas por data (`content/YYYY-MM-DD`).
   - Suporte a post único (1 imagem) ou carrossel (múltiplas imagens).
   - Leitura automática de legenda do arquivo `caption.txt`.
+- **Automação Contínua (24/7):**
+  - Loop de verificação horária para postagens automáticas.
+  - Persistência de estado (`posted_dates.json`) para evitar postagens duplicadas no mesmo dia.
+  - Suporte nativo a **systemd** para execução como serviço (daemon) em servidores Linux.
 - **Medidas Anti-Bot:** Implementação de delays aleatórios e simulação de dispositivo em todas as interações.
 
 ## 🛠️ Tecnologias Utilizadas
