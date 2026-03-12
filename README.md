@@ -1,4 +1,4 @@
-# InstAPI 📸
+# instAutopost 📸
 
 Automação inteligente para Instagram utilizando a biblioteca `instagrapi`. O foco deste projeto é fornecer uma interface modular e segura para gerenciar perfis do Instagram, simulando o comportamento humano e dispositivos reais para evitar detecção de bots.
 
@@ -12,7 +12,11 @@ Automação inteligente para Instagram utilizando a biblioteca `instagrapi`. O f
 - **Listagem de Posts:** 
   - Recupera os últimos 20 posts do perfil conectado.
   - Exibe ID, data de criação e legenda formatada no terminal.
-  - **Medidas Anti-Bot:** Implementação de delays aleatórios entre as requisições.
+- **Postagem Automática (Feed e Carrossel):**
+  - Realiza uploads baseados em pastas organizadas por data (`content/YYYY-MM-DD`).
+  - Suporte a post único (1 imagem) ou carrossel (múltiplas imagens).
+  - Leitura automática de legenda do arquivo `caption.txt`.
+- **Medidas Anti-Bot:** Implementação de delays aleatórios e simulação de dispositivo em todas as interações.
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -42,23 +46,23 @@ curl -LsSf https://astral-sh/uv/install.sh | sh
    cp .env.example .env
    ```
 
-3. Preencha as suas credenciais no `.env`:
-   - `IG_USERNAME`: Seu usuário do Instagram.
-   - `IG_PASSWORD`: Sua senha.
-   - `TOTP_KEY`: A chave secreta do seu autenticador 2FA.
+3. Preencha as suas credenciais no `.env`.
 
 ## 🏃 Como Rodar
 
-Para executar o script de listagem de posts:
-```bash
-uv run main.py
-```
+1. Organize seu conteúdo na pasta `content/`:
+   - Crie uma pasta com a data atual: `content/2026-03-12/`.
+   - Adicione as imagens e o arquivo `caption.txt`.
+2. Execute o script:
+   ```bash
+   uv run main.py
+   ```
 
 ## 📂 Estrutura do Projeto
 
 - `main.py`: Ponto de entrada que orquestra o fluxo de login e execução de comandos.
 - `auth.py`: Módulo responsável pela lógica de autenticação e simulação de dispositivo.
-- `controller.py`: Módulo que contém as funcionalidades de negócio (ex: listagem de posts).
+- `controller.py`: Módulo que contém as funcionalidades de negócio (listagem e postagem).
 - `docs/plano.md`: Documentação conceitual e planejamento de features.
 
 ## ⚠️ Aviso Legal

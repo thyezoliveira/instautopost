@@ -2,7 +2,7 @@ import os
 import logging
 from dotenv import load_dotenv
 from auth import get_client, login_user
-from controller import list_user_posts
+from controller import list_user_posts, post_content
 
 # Configuração de Logs
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
@@ -26,8 +26,11 @@ def main():
     if login_user(cl, USERNAME, PASSWORD, TOTP_KEY, SESSION_FILE):
         logger.info("Login realizado com sucesso!")
         
-        # Chama a funcionalidade de listagem de posts
-        list_user_posts(cl)
+        # 1. Lista os posts do usuário
+#        list_user_posts(cl)
+        
+        # 2. Verifica se há conteúdo agendado para hoje e posta
+        post_content(cl)
     else:
         logger.error("Falha na autenticação.")
 

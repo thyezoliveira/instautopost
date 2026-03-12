@@ -17,3 +17,18 @@ Recupera e exibe no terminal as publicações da conta conectada.
     - **Pausas Estratégicas (Delays):** Intervalos aleatórios entre requisições para evitar padrões robóticos.
     - **Tratamento de Erros:** Monitoramento de bloqueios temporários e desafios (checkpoints) do Instagram, com interrupção segura ou reativação inteligente para evitar banimentos.
 
+### 2. Postagem Automática (Feed e Carrossel)
+Automatiza o upload de conteúdos a partir de uma estrutura de arquivos organizada.
+- **Estrutura de Arquivos:**
+    - Pasta raiz `content/` contendo subpastas nomeadas com a data da postagem (ex: `2026-03-12/`).
+    - **Post Único:** Uma imagem dentro da pasta da data.
+    - **Carrossel:** Múltiplas imagens dentro da mesma pasta de data.
+    - **Legenda:** Arquivo `caption.txt` na pasta com o texto e hashtags.
+- **Configurações de Mídia:**
+    - Suporte a diferentes proporções (Quadrado 1:1 ou Retangular/Portrait 4:5).
+    - Redimensionamento automático se necessário para cumprir requisitos do Instagram.
+- **Fluxo de Operação:**
+    - O script identifica a pasta do dia atual, valida os arquivos e realiza o upload seguindo a ordem alfabética das imagens para carrosséis.
+    - Mantém os mesmos padrões de **Segurança e Simulação Humana** (delays e User-Agent) aplicados na listagem.
+
+
