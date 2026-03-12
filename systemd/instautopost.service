@@ -9,8 +9,8 @@ WorkingDirectory=/home/thyez-oliveira/Documentos/thyez/softwares/instapi
 ExecStart=/usr/bin/bash -c 'uv run python main.py --loop'
 Restart=always
 RestartSec=60
-StandardOutput=append:/home/thyez-oliveira/Documentos/thyez/softwares/instapi/instapi.log
-StandardError=append:/home/thyez-oliveira/Documentos/thyez/softwares/instapi/instapi.log
+StandardOutput=append:/home/thyez-oliveira/Documentos/thyez/softwares/instapi/instautopost.log
+StandardError=append:/home/thyez-oliveira/Documentos/thyez/softwares/instapi/instautopost.log
 
 [Install]
 WantedBy=multi-user.target

@@ -74,20 +74,20 @@ Para manter o bot rodando 24/7 em um servidor Linux, utilize o arquivo de servi�
 
 1. **Copie o arquivo de serviço:**
    ```bash
-   sudo cp systemd/instapi.service /etc/systemd/system/
+   sudo cp systemd/instautopost.service /etc/systemd/system/
    ```
 
 2. **Ative e inicie o serviço:**
    ```bash
    sudo systemctl daemon-reload
-   sudo systemctl enable instapi.service
-   sudo systemctl start instapi.service
+   sudo systemctl enable instautopost.service
+   sudo systemctl start instautopost.service
    ```
 
 3. **Monitore a execução:**
-   - **Logs do Arquivo:** `tail -f instapi.log`
-   - **Status do Systemd:** `systemctl status instapi.service`
-   - **Logs do Systemd:** `journalctl -u instapi -f`
+   - **Logs do Arquivo:** `tail -f instautopost.log`
+   - **Status do Systemd:** `systemctl status instautopost.service`
+   - **Logs do Systemd:** `journalctl -u instautopost -f`
 
 ## 📂 Estrutura do Projeto
 
