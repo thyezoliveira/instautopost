@@ -91,11 +91,18 @@ Para manter o bot rodando 24/7 em um servidor Linux, utilize o arquivo de servi�
 
 ## 📂 Estrutura do Projeto
 
-
 - `main.py`: Ponto de entrada que orquestra o fluxo de login e execução de comandos.
 - `auth.py`: Módulo responsável pela lógica de autenticação e simulação de dispositivo.
 - `controller.py`: Módulo que contém as funcionalidades de negócio (listagem e postagem).
 - `docs/plano.md`: Documentação conceitual e planejamento de features.
+
+## 👨‍💻 Autor
+
+Desenvolvido por **Thyéz de Oliveira Monteiro**  
+🚀 Engenheiro de Software na **ForjaTech**
+
+- **Instagram:** [@forja_tech](https://www.instagram.com/forja_tech/)
+- **Website:** [forjatech-oficial.netlify.app](https://forjatech-oficial.netlify.app/)
 
 ## ⚠️ Aviso Legal
 
